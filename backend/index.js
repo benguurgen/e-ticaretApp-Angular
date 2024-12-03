@@ -10,6 +10,10 @@ app.use(cors()); //
 //     res.json({message: "Api isteği başarılı şekilde çalışıyor."})
 // }); //basit bir api isteği tasarladık çalışıyor mu test edelim
 
+const authRouter = require("./routers/auth.route")
+
+app.use("/api/auth", authRouter);
+
 connection();
 
 const port = process.env.PORT || 5000; //portumuzu belirledik. Eğer canlıya alınırsa hangi protta ayağa kalkacağı belliyse ilki belli degilse 5000 portundan ayağa kalkacak.
