@@ -14,11 +14,20 @@ router.post("/register",async(req,res)=>{  //post oluşturuyoruz.
         const user = new User(req.body);
         user._id= uuidv4();
         user.createdDate = new Date();
-        user.isAdmin = false,
-        await user.save();
-        const token = jwt.sign({},secretKey,options);
-        let model = {token: token, user: user}; //yeni obje oluşturuyoruz
-        res.json(model); //modeli gönderdik
+        user.isAdmin = false;
+
+        const checkUserEmail = await User.findOne({email: user.email});
+
+        if(checkUserEmail !=null){
+            res.status(403).json({message: "Bu mail adresi daha önce kullanılmış!"}) //mail uniqueliğini kontrol ediyoruz.
+        }else{
+            await user.save();
+            const token = jwt.sign({},secretKey,options);
+            let model = {token: token, user: user}; //yeni obje oluşturuyoruz
+            res.json(model); //modeli gönderdik
+
+        }
+
 
     } catch(error){
         res.status(500).json({message: error.message});

@@ -13,7 +13,8 @@ const userSchema= new mongoose.Schema({ //Schema oluşturuyoruz.
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     isAdmin: Boolean,
     createdDate: Date
