@@ -7,6 +7,7 @@ import { provideHttpClient } from "@angular/common/http";
 import { routes } from "./app/app.routes";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,6 +16,7 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       CommonModule,
       BrowserAnimationsModule,
+      NgxSpinnerModule,
       ToastrModule.forRoot({
         closeButton: true,
         progressBar: true
