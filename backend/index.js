@@ -11,8 +11,10 @@ app.use(cors()); //
 // }); //basit bir api isteği tasarladık çalışıyor mu test edelim
 
 const authRouter = require("./routers/auth.route")
+const categoryRouter = require("./routers/category.router")
 
 app.use("/api/auth", authRouter); //authrouterı api olarak kullanabilmek için yazdığımız kod
+app.use("/api/category", categoryRouter);
 
 connection();
 
