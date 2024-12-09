@@ -14,7 +14,7 @@ const authRouter = require("./routers/auth.route")
 const categoryRouter = require("./routers/category.router")
 
 app.use("/api/auth", authRouter); //authrouterı api olarak kullanabilmek için yazdığımız kod
-app.use("/api/category", categoryRouter);
+app.use("/api/categories", categoryRouter);
 
 connection();
 
