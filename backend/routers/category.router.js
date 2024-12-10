@@ -30,10 +30,10 @@ router.post("/add", async (req, res) => {
 router.post("/removeById", async (req, res) => {
     try {
         const { _id } = req.body;
-        await Category.findByIdAndRemove(_id);
+        await Category.findByIdAndDelete({_id});
         res.json({ message: "Kategori kaydı başarıyla silindi!!" })
     } catch (error) {
-        res.stats(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 });
 
