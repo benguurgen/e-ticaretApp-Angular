@@ -5,6 +5,7 @@ const connection = require("./database/db");
 
 app.use(express.json()); // yapacağımız tüm istekleri json formatında olduğunu bildirdik.
 app.use(cors()); // 
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); //upload klasorunu paylaşıma açtık.. Resimleri dışardan okyabilmek için
 
 // app.get("",(req,res)=>{
 //     res.json({message: "Api isteği başarılı şekilde çalışıyor."})
@@ -12,9 +13,11 @@ app.use(cors()); //
 
 const authRouter = require("./routers/auth.route")
 const categoryRouter = require("./routers/category.router")
+const productRouter = require("./routers/product.router")
 
 app.use("/api/auth", authRouter); //authrouterı api olarak kullanabilmek için yazdığımız kod
 app.use("/api/categories", categoryRouter);
+app.use("/api/products", productRouter);
 
 connection();
 
