@@ -30,3 +30,15 @@ router.post("/add",upload.array("images"),async(req,res)=>{
     });
 
 })
+//Ürün Silme
+router.post("/removeById",async (req,res)=>{
+    response(res,async()=>{
+        const {_id}= req.body;
+        const product = await Product.findById(_id);
+        for(const image of product.imageUrls){
+            fs.unlink(image.path, ()=>{});
+        }
+        await Product.findByIdAndDelete(_id);
+        res.json({message: "Ürün kaydı başarıyla silindi!"})
+    })
+} )
