@@ -101,7 +101,7 @@ router.post("/getById", async (req, res) => {
     });
 });
 //Ürünü güncelleme 
-router.post("/update", upload.array(images), async (req, res) => {
+router.post("/update", upload.array("images"), async (req, res) => {
     response(res, async () => {
         const { _id, name, stock, price, categories } = req.body;
         let product = await Product.findById(_id);

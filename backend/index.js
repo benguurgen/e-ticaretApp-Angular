@@ -2,6 +2,8 @@ const express = require("express"); //express module ekledik.
 const app = express(); //metodu verdik
 const cors = require("cors"); //cors politikası uygulayacağız.
 const connection = require("./database/db");
+const path = require("path")
+
 
 app.use(express.json()); // yapacağımız tüm istekleri json formatında olduğunu bildirdik.
 app.use(cors()); // 
