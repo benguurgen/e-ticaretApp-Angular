@@ -48,11 +48,12 @@
       <td>
         <div class="form-check">
           <input
+            (click)="changeProductStatus(product._id)"
             class="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckChecked"
-            checked
+            [checked]="product.isActive"
           />
         </div>
       </td>
