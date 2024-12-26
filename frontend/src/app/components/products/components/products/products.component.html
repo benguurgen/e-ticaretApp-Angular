@@ -1,7 +1,7 @@
 <app-blank title="Ürünler" sectionTitle="Ürünler Listesi">
  <!-- Ekleme ve Search -->
   <div class="form-group">
-    <button class="btn btn-outline-primary" routerLink="/product/add">
+    <button class="btn btn-outline-primary" routerLink="/products/add">
         <i class="fa fa-plus"></i>
     </button>
     <div class="col-md-3" style="float: right;">
@@ -60,7 +60,7 @@
         <button class="btn btn-outline-warning btn-sm" title="Güncelle">
           <i class="fa fa-edit"></i>
         </button>
-        <button class="btn btn-outline-danger btn-sm" title="Sil">
+        <button (click)="removeById(product._id)"class="btn btn-outline-danger btn-sm" title="Sil">
           <i class="fa fa-trash"></i>
         </button>
       </td>
