@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
                     name: { $regex: search, $options: 'i' }
                 }
             ]
-        }).count();
+        }).countDocuments();
 
         let products = await Product
             .find({
