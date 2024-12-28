@@ -1,1 +1,61 @@
-<app-blank title="Anasayfa" sectionTitle="Ürünler"></app-blank>
+<app-blank title="Anasayfa" sectionTitle="Ürünler">
+    <div class="row">
+        <div class="col-md-3 cerceve">
+            <ul>
+                <li
+                (click)="changeCategory('Tümü')"
+                 [ngClass] = "request.categoryName == 'Tümü' ? 'active' : ''">
+                    Tümü
+                </li>
+                <li 
+                (click)="changeCategory(category.name)"
+                [ngClass] = "request.categoryName == category.name ? 'active' : ''"
+                *ngFor="let category of categories">
+                    {{category.name}}
+    
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-7">
+                        <label>Arama</label>
+                        <input [(ngModel)]="request.search" type="search" class="form-control" placeholder="Aranacak kelimeyi yazın..">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Fiyat Sıralaması</label>
+                        <select [(ngModel)]="request.priceFilter" class="form-control">
+                            <option value="0">Önerilen Sıralama</option>
+                            <option value="1">Artan Fiyat</option>
+                            <option value="2">Azalan Fiyat</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label> </label><br>
+                        <button class="btn btn-primary">Getir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h1>Domates</h1>
+                        </div>
+                        <div class="card-body">
+                            <img src="https://images.migrosone.com/sanalmarket/product/28080000/domates-kg-c7462d-1650x1650.jpg" alt="" width="200px">
+                            <p>Kalan Adet: 100</p>
+                            <hr>
+                            <h5 class="alert alert-danger">Birim Fiyatı: 100 tl</h5>
+                            <button class="btn btn-outline-success w-100 mt-1">
+                                Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-blank>
