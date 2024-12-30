@@ -3,12 +3,12 @@
         <div class="col-md-3 cerceve">
             <ul>
                 <li
-                (click)="changeCategory('Tümü')"
+                (click)="changeCategory('','Tümü')"
                  [ngClass] = "request.categoryName == 'Tümü' ? 'active' : ''">
                     Tümü
                 </li>
                 <li 
-                (click)="changeCategory(category.name)"
+                (click)="changeCategory(category._id,category.name)"
                 [ngClass] = "request.categoryName == category.name ? 'active' : ''"
                 *ngFor="let category of categories">
                     {{category.name}}
@@ -28,28 +28,28 @@
                         <select [(ngModel)]="request.priceFilter" class="form-control">
                             <option value="0">Önerilen Sıralama</option>
                             <option value="1">Artan Fiyat</option>
-                            <option value="2">Azalan Fiyat</option>
+                            <option value="-1">Azalan Fiyat</option>
                         </select>
                     </div>
                     <div class="col-md-2">
                         <label> </label><br>
-                        <button class="btn btn-primary">Getir</button>
+                        <button (click)="getAll()" class="btn btn-primary">Getir</button>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-4" *ngFor="let product of products let i = index">
                     <div class="card text-center">
                         <div class="card-header">
-                            <h1>Domates</h1>
+                            <h1>{{product.name}}</h1>
                         </div>
                         <div class="card-body">
-                            <img src="https://images.migrosone.com/sanalmarket/product/28080000/domates-kg-c7462d-1650x1650.jpg" alt="" width="200px">
-                            <p>Kalan Adet: 100</p>
+                            <img [src]="'http://localhost:5000/' + product.imageUrls[0].path" alt="" width="200px">
+                            <p>Kalan Adet: {{product.stock}}</p>
                             <hr>
-                            <h5 class="alert alert-danger">Birim Fiyatı: 100 tl</h5>
-                            <button class="btn btn-outline-success w-100 mt-1">
+                            <h5 class="alert alert-danger">Birim Fiyatı: {{product.price}} TL</h5>
+                            <button *ngIf="product.stock > 0" class="btn btn-outline-success w-100 mt-1">
                                 Sepete Ekle
                             </button>
                         </div>

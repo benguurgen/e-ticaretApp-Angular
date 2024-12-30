@@ -83,13 +83,13 @@ router.post("/", async (req, res) => {
     })
 })
 //Ürünün Aktif/Pasif durumunu değiştir
-router.post("/changeActiveStatus", async(req,res)=>{
-    response(res, async()=>{
-        const {_id} = req.body;
+router.post("/changeActiveStatus", async (req, res) => {
+    response(res, async () => {
+        const { _id } = req.body;
         let product = await Product.findById(_id);
-        product.isActive=!product.isActive;
+        product.isActive = !product.isActive;
         await Product.findByIdAndUpdate(_id, product);
-        res.json({message:"Ürünün durumu başarıyla değiştirildi."});
+        res.json({ message: "Ürünün durumu başarıyla değiştirildi." });
     });
 })
 //Ürünü Idye göre getir
@@ -137,6 +137,46 @@ router.post("/removeImageByProductIdAndIndex", async (req, res) => {
             fs.unlink(image.path, () => { });
             res.json({ message: "Resim başarıyla kaldırıldı." });
         }
+    });
+});
+
+
+// Anasayfa için ürün listesini getir.
+router.post("/getAllForHomePage", async (req, res) => {
+    response(res, async () => {
+        const { pageNumber, pageSize, search, categoryId, priceFilter } = req.body;
+        let products;
+
+        if (priceFilter == "0") {
+            products = await Product
+                .find({
+                    isActive: true,
+                    categories: { $regex: categoryId, $options: 'i' },
+                    $or: [
+                        {
+                            name: { $regex: search, $options: 'i' }
+                        }
+                    ]
+                })
+                // Sıralama yapılmayacaksa sort kullanılmaz
+                .populate("categories");
+        } else {
+            products = await Product
+                .find({
+                    isActive: true,
+                    categories: { $regex: categoryId, $options: 'i' },
+                    $or: [
+                        {
+                            name: { $regex: search, $options: 'i' }
+                        }
+                    ]
+                })
+                // priceFilter artan veya azalan sıralama için kullanılacak
+                .sort({ price: priceFilter === "1" ? 1 : -1 }) // priceFilter "1" ise artan sırada, değilse azalan sırada
+                .populate("categories");
+        }
+
+        res.json(products);
     });
 });
 

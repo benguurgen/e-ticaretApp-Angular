@@ -16,7 +16,8 @@ import { TableComponent } from '../components/table/table.component';
     RouterModule,
     ValidDirective,
     BlankComponent,
-    TableComponent
+    TableComponent,
+    
   ],
   exports: [
     CommonModule,
