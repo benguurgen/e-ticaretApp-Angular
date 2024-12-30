@@ -64,4 +64,12 @@ router.post("/", async(req, res)=>{
     })
 });
 
+
+router.post("/getCount", async(req,res)=>{
+    response(res, async()=>{
+        const {userId} = req.body;
+        const count = await Basket.find({userIs: userId}).count();
+        res.json({count: count});
+    })
+})
 module.exports = router;

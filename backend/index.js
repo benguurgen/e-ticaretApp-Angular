@@ -16,7 +16,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); //upload k
 const authRouter = require("./routers/auth.route");
 const categoryRouter = require("./routers/category.router");
 const productRouter = require("./routers/product.router");
-const basketRouter = requie("./routers/basket.router")
+const basketRouter = require("./routers/basket.router")
 
 app.use("/api/auth", authRouter); //authrouterı api olarak kullanabilmek için yazdığımız kod
 app.use("/api/categories", categoryRouter);
