@@ -13,13 +13,15 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); //upload k
 //     res.json({message: "Api isteği başarılı şekilde çalışıyor."})
 // }); //basit bir api isteği tasarladık çalışıyor mu test edelim
 
-const authRouter = require("./routers/auth.route")
-const categoryRouter = require("./routers/category.router")
-const productRouter = require("./routers/product.router")
+const authRouter = require("./routers/auth.route");
+const categoryRouter = require("./routers/category.router");
+const productRouter = require("./routers/product.router");
+const basketRouter = requie("./routers/basket.router")
 
 app.use("/api/auth", authRouter); //authrouterı api olarak kullanabilmek için yazdığımız kod
 app.use("/api/categories", categoryRouter);
 app.use("/api/products", productRouter);
+app.use("/api/baskets", basketRouter);
 
 connection();
 
