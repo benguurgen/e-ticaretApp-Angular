@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const { v4: uuidv4 } = require("uuid");
+const {v4: uuidv4} = require("uuid");
 const Order = require("../models/order");
 const Basket = require("../models/basket");
 const response = require("../services/response.service")
@@ -13,10 +13,10 @@ router.post("/create", async (req, res) => {
 
         for (const basket of baskets) {
             let order = new Order();
-            order._id = uuid4();
-            order.productId = element.productId;
-            order.price = element.price;
-            order.quantity = element.quantity;
+            order._id = uuidv4();
+            order.productId = basket.productId;
+            order.price = basket.price;
+            order.quantity = basket.quantity;
             order.userId = userId;
             order.createdDate = new Date();
 
@@ -45,7 +45,7 @@ router.post("/", async(req,res)=>{
                 }
             }
         ])
-        .order({createdDate: -1});
+        .sort({createdDate: -1});
 
         res.json(orders);
 

@@ -3,57 +3,61 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: "login",
-        loadComponent: 
-            ()=> import("./components/auth/components/login/login.component")
-            .then(c=>c.LoginComponent)
+        loadComponent:
+            () => import("./components/auth/components/login/login.component")
+                .then(c => c.LoginComponent)
     },
     {
         path: "register",
         loadComponent:
             () => import("./components/auth/components/register/register.component")
-            .then(c =>c.RegisterComponent)
+                .then(c => c.RegisterComponent)
     },
     {
         path: "",
-        loadComponent: 
-            ()=> import("./components/layouts/layouts.component")
-            .then(c=> c.LayoutsComponent),
+        loadComponent:
+            () => import("./components/layouts/layouts.component")
+                .then(c => c.LayoutsComponent),
         children: [
             {
                 path: "",
                 loadComponent:
-                    ()=> import("./components/home/home.component")
-                    .then(c=> c.HomeComponent)
+                    () => import("./components/home/home.component")
+                        .then(c => c.HomeComponent)
             },
             {
                 path: "products",
                 loadComponent:
-                    ()=> import("./components/products/components/products/products.component")
-                    .then(c=> c.ProductsComponent)
+                    () => import("./components/products/components/products/products.component")
+                        .then(c => c.ProductsComponent)
             },
             {
                 path: "products/add",
                 loadComponent:
-                    ()=> import("./components/products/components/product-add/product-add.component")
-                    .then(c=> c.ProductAddComponent)
+                    () => import("./components/products/components/product-add/product-add.component")
+                        .then(c => c.ProductAddComponent)
             },
             {
                 path: "products/update/:value",
                 loadComponent:
-                    ()=> import("./components/products/components/product-update/product-update.component")
-                    .then(c=> c.ProductUpdateComponent)
+                    () => import("./components/products/components/product-update/product-update.component")
+                        .then(c => c.ProductUpdateComponent)
             },
             {
                 path: "categories",
                 loadComponent:
-                    ()=> import("./components/categories/categories.component")
-                    .then(c=> c.CategoriesComponent)
+                    () => import("./components/categories/categories.component")
+                        .then(c => c.CategoriesComponent)
             },
             {
                 path: "baskets",
-                loadComponent: () => import("./components/basket/components/basket/basket.component").then(c=> c.BasketComponent)
+                loadComponent: () => import("./components/basket/components/basket/basket.component").then(c => c.BasketComponent)
+            },
+            {
+                path: "orders",
+                loadComponent: () => import("./components/orders/components/orders/orders.component").then(c => c.OrdersComponent)
             }
-        ]    
+        ]
 
     }
 ];

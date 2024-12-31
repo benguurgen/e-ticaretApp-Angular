@@ -38,7 +38,7 @@
           <td>{{ basket?.products[0]?.name }}</td>
           <td>{{ basket.quantity }}</td>
           <td>{{ basket.price }}</td>
-          <td>{{ (basket.price * basket.price).toFixed(2) }}</td>
+          <td>{{ (basket.price * basket.quantity).toFixed(2) }}</td>
 
           <td>
             <button
@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-3" style="border: 1px solid #ccc; padding: 10px;">
       <h4 class="alert alert-danger">Ödenecek Tutar: {{ sum }} TL</h4>
-      <button *ngIf="baskets.length>0" class="btn btn-danger w-100"> Ödeme Yap</button>
+      <button (click)="createOrder()" *ngIf="baskets.length>0" class="btn btn-danger w-100"> Ödeme Yap</button>
     </div>
   </div>
 </app-blank>
