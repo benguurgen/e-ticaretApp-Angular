@@ -34,11 +34,13 @@ router.post("/removeById", async(req, res)=>{
         const{_id} = req.body;
 
         let basket = await Basket.findById(_id);
-        let product = await Product.findById(productId);
+        let product = await Product.findById(basket.productId);
         product.stock += basket.quantity;
-        await Product.findByIdAndUpdate(productId, product);
+        await Product.findByIdAndUpdate(basket.productId, product);
 
         await Basket.findOneAndDelete(_id);
+
+        res.json({message: "Ürünü sepetten başatıyla kaldırdık."})
     });
 });
 
@@ -65,11 +67,11 @@ router.post("/", async(req, res)=>{
 });
 
 
-router.post("/getCount", async(req,res)=>{
-    response(res, async()=>{
+router.post("/getCount",async(req, res)=> {
+    response(res, async()=> {
         const {userId} = req.body;
-        const count = await Basket.find({userIs: userId}).count();
+        const count = await Basket.find({userId: userId}).countDocuments();
         res.json({count: count});
-    })
-})
+    });
+});
 module.exports = router;

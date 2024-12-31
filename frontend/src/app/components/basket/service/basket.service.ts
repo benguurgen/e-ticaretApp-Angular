@@ -19,55 +19,22 @@ export class BasketService {
     this._http.post<BasketModel[]>("baskets", model, res=> callBack(res))
   }
 
-  getCount() {
+  getCount(){
     let userString = localStorage.getItem("user");
-    
-    // `user` değeri mevcut değilse kontrol
-    if (!userString) {
-      console.error("User is not logged in or 'user' is missing in localStorage.");
-      return;
-    }
-  
-    try {
-      let user = JSON.parse(userString);
-      if (!user || !user._id) {
-        console.error("Invalid user data in localStorage.");
-        return;
-      }
-  
-      let model = { userId: user._id };
-      this._http.post<any>("baskets/getCount", model, (res) => {
-        this.count = res.count; // Başarıyla alınan sonucu sayaca ata
-      });
-    } catch (error) {
-      console.error("Error parsing user data:", error);
-    }
+    let user = JSON.parse(userString);
+    let model = {userId: user._id};
+    this._http.post<any>("baskets/getCount",model, res=> this.count = res.count);
   }
   
-  add(model: BasketModel, callBack: (res: MessageResponseModel) => void) {
+
+  add(model:BasketModel, callBack: (res: MessageResponseModel)=> void){
     let userString = localStorage.getItem("user");
-    
-    // `user` değeri mevcut değilse kontrol
-    if (!userString) {
-      console.error("User is not logged in or 'user' is missing in localStorage.");
-      return;
-    }
-  
-    try {
-      let user = JSON.parse(userString);
-      if (!user || !user._id) {
-        console.error("Invalid user data in localStorage.");
-        return;
-      }
-  
-      model.userId = user._id; // Kullanıcı kimliğini modele ekle
-      this._http.post<MessageResponseModel>("baskets/add", model, (res) => {
-        this.getCount(); // Sepet sayısını güncelle
-        callBack(res); // Callback işlevini çağır
-      });
-    } catch (error) {
-      console.error("Error parsing user data:", error);
-    }
+    let user = JSON.parse(userString);
+    model.userId = user._id;
+    this._http.post<MessageResponseModel>("baskets/add",model, res=>{
+      this.getCount();
+      callBack(res);
+    });
   }
 
   removeById(model: any,callBack: (res: MessageResponseModel)=> void){
